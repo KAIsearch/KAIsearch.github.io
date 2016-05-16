@@ -12,7 +12,8 @@
 
 <body>
   <div id="container">
-    <h1>Database List</h1>
+    <h1>KAI Search</h1>
+    <h3>Database List</h3>
     <div id="app">
       <div id='form-container'></div>
       <div id='list-container'></div>
@@ -26,7 +27,7 @@
       render: function() {
         return (
           <form id="add-form" onSubmit={this.handleSubmit}>
-            <input id='create' ref="description" type='text' placeholder='Add Something to the list!' />
+            <input id='create' ref="description" type='text' placeholder='Add databases here' />
           </form>
         )
       },
@@ -37,9 +38,9 @@
         this.refs.description.getDOMNode().value = ''
         // alert('trying to create an item with description ' + description)
         ListStore.addItem(description);
-		 //numDatabase++; 
+		 //numDatabase++;
 		//listDatabase[numDatabase]=description;
-    //numDatabase--; 
+    //numDatabase--;
 		//alert(listDatabase[numDatabase]+"num:"+numDatabase);  find out what is correct way to comment stuff!!!
       }
     })
@@ -53,7 +54,7 @@
           <li className={itemClass}>
             <span className='complete-button' onClick={this.handleComplete}>{'\u2714'}</span>
             <div className='description'>{this.props.description}</div>
-            <span className='delete-button' onClick={this.removeItem}>{'\u2718'}</span>             
+            <span className='delete-button' onClick={this.removeItem}>{'\u2718'}</span>
 
           </li>
         )
@@ -62,7 +63,7 @@
     // alert('trying to update item with an id of ' + this.props.id)
     ListStore.toggleCompleteness(this.props.id);
     numDatabase++;
-    listDatabase[numDatabase]=this.props.description; 
+    listDatabase[numDatabase]=this.props.description;
     //alert(listDatabase[numDatabase]+"num:"+numDatabase);
     },
 
@@ -121,26 +122,31 @@
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-    <h1>Company name and Attrribute</h1>
-   <!--  
+  <div id="container2">
+    <h3>Company name and Attrribute</h3>
+   <!--
     <div class="center">
     <div id="logo">
 	  <img src="https://www.google.es/images/srpr/logo11w.png">
     </div> -->
     <div id="search">
        <!-- <form action="https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q=randommmmm+search">   -->
+           <b1>Company name</b1>
            <input type="text" name="search" id="UserInput"><br>
-           <input type="submit" value="Search" onclick="jsBox()">   
+           <b1>Attribute   </b1>
+           <input type="text" name="search" id="UserInputB"><br>
+           <input type="submit" value="Search" onclick="jsBox()">
            <!-- <input type="submit" value="I'm Feeling Lucky" -->
         </form>
-    </div>    
-   <!--  </div> 
+    </div>
+  </div>
+   <!--  </div>
     <div id="footer">
             <span class="fr">
                 <a href="#" class="priv">Privacy</a>
                 <a href="#" class="terms">Terms</a>
                 <a href="#" class="sett">Settings</a>
-            </span> 
+            </span>
             <span class="fl">
                 <a href="#" class="adv">Advertising</a>
                 <a href="#" class="bus">Business</a>
@@ -148,20 +154,20 @@
             </span>
     </div>   	-->
 </body>
-</html>	
+</html>
 <script language="javascript">
 function jsBox(){
    var input = document.getElementById("UserInput").value;
-
+   var attribute = document.getElementById("UserInputB").value;
 
 
 
     //alert(input);
 	var databaseString="";
 	for (i=1;i<=numDatabase;i++) databaseString=databaseString+"site:"+listDatabase[i]+" OR ";
-	var webUrl = "https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q="+input+" "+databaseString;
+	var webUrl = "https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q="+"\""+input+"\""+" "+attribute+" "+databaseString;
 	//windowpop("https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q=randommmmm+search", 500, 500);
-	
+
 	window.open(webUrl,'search','height=800,width=500');
    //alert("inputfea");
 }

@@ -6,11 +6,17 @@ body {
 #container {
   width: 600px;
   font-family: 'Titillium Web', 'Arial', sans-serif;
-  font-size: 40px;
+  font-size: 25px;
   text-align: center;
-  margin: 40px auto;
+  margin: 30px auto;
 }
-
+#container2 {
+  width: 600px;
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  font-size: 25px;
+  text-align: center;
+  margin: 30px auto;
+}
 h1 {
   margin: 20px;
   color: #7d82b0;
@@ -18,7 +24,7 @@ h1 {
 
 #app {
   box-shadow: 0 0 5px #684F91;
-  font-size: 35px;
+  font-size: 20px;
   color: #080D3B;
   background-color: white;
 }
@@ -37,7 +43,7 @@ form {
   border-right:   1px  solid #7d82b0;
   border-bottom:  2px  solid #7d82b0;
   border-top:     15px solid #477187;
-  
+
   text-align: center;
 }
 
