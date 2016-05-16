@@ -1,0 +1,168 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:600' rel='stylesheet' type='text/css'>
+  <script src="vendor/console-polyfill.js"></script>
+  <script src="vendor/es5-shim.min.js"></script>
+  <script src="vendor/es5-sham.min.js"></script>
+  <script src="vendor/jquery.min.js"></script>
+  <script src="vendor/react-with-addons.js"></script>
+  <script src="vendor/JSXTransformer.js"></script>
+  <script src="store.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <h1>Database List</h1>
+    <div id="app">
+      <div id='form-container'></div>
+      <div id='list-container'></div>
+    </div>
+  </div>
+
+  <script type="text/jsx">
+  var listDatabase = new Array();
+  var numDatabase=0;//--------------need to change to at least 3
+    var CreationForm = React.createClass({
+      render: function() {
+        return (
+          <form id="add-form" onSubmit={this.handleSubmit}>
+            <input id='create' ref="description" type='text' placeholder='Add Something to the list!' />
+          </form>
+        )
+      },
+
+      handleSubmit: function(event) {
+        event.preventDefault()
+        var description = this.refs.description.getDOMNode().value//---get val
+        this.refs.description.getDOMNode().value = ''
+        // alert('trying to create an item with description ' + description)
+        ListStore.addItem(description);
+		 //numDatabase++; 
+		//listDatabase[numDatabase]=description;
+    //numDatabase--; 
+		//alert(listDatabase[numDatabase]+"num:"+numDatabase);  find out what is correct way to comment stuff!!!
+      }
+    })
+//link for creating dynemic arrey: https://www.hscripts.com/tutorials/javascript/dynamic-array.php
+
+    var Item = React.createClass({
+
+      render: function() {
+        var itemClass = this.props.completed ? 'item completed' : 'item'
+        return (
+          <li className={itemClass}>
+            <span className='complete-button' onClick={this.handleComplete}>{'\u2714'}</span>
+            <div className='description'>{this.props.description}</div>
+            <span className='delete-button' onClick={this.removeItem}>{'\u2718'}</span>             
+
+          </li>
+        )
+      },
+    handleComplete: function() {
+    // alert('trying to update item with an id of ' + this.props.id)
+    ListStore.toggleCompleteness(this.props.id);
+    numDatabase++;
+    listDatabase[numDatabase]=this.props.description; 
+    //alert(listDatabase[numDatabase]+"num:"+numDatabase);
+    },
+
+    removeItem: function() {
+       ListStore.deleteItem(this.props.id);
+    }
+  })
+
+    var List = React.createClass({
+      getInitialState: function() {
+        return (
+          {items: []}
+          // {items: [
+          //   {description: 'a gallon of milk',  completed: true, id: 1},
+          //   {description: 'a stick of butter', completed: false, id: 2}
+          // ]}
+        )
+      },
+
+      componentWillMount: function() {
+        $(ListStore).on('storeHasChanged', function() {
+          this.setState({ items: ListStore.getItems() })
+        }.bind(this))
+      },
+
+      render: function() {
+        var itemComponents = this.state.items.map(function(itemData) {//***"itemData" should be the things that never get deleted
+          return <Item key={'item-' + itemData.id} {...itemData}/> //display the list
+        })
+
+        return (
+          <ul id='list'>
+            {itemComponents}
+          </ul>
+        )
+      }
+    })
+
+    React.render(<CreationForm />, document.getElementById('form-container') )
+    React.render(<List />, document.getElementById('list-container') )
+    ListStore.loadItems()
+  </script>
+</body>
+
+
+
+
+
+
+
+
+<html>
+<head>
+	<title>KAIsearch</title>
+	<link rel="stylesheet" type="text/css" href="reset.css"/>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+    <h1>Company name and Attrribute</h1>
+   <!--  
+    <div class="center">
+    <div id="logo">
+	  <img src="https://www.google.es/images/srpr/logo11w.png">
+    </div> -->
+    <div id="search">
+       <!-- <form action="https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q=randommmmm+search">   -->
+           <input type="text" name="search" id="UserInput"><br>
+           <input type="submit" value="Search" onclick="jsBox()">   
+           <!-- <input type="submit" value="I'm Feeling Lucky" -->
+        </form>
+    </div>    
+   <!--  </div> 
+    <div id="footer">
+            <span class="fr">
+                <a href="#" class="priv">Privacy</a>
+                <a href="#" class="terms">Terms</a>
+                <a href="#" class="sett">Settings</a>
+            </span> 
+            <span class="fl">
+                <a href="#" class="adv">Advertising</a>
+                <a href="#" class="bus">Business</a>
+                <a href="#" class="about">About</a>
+            </span>
+    </div>   	-->
+</body>
+</html>	
+<script language="javascript">
+function jsBox(){
+   var input = document.getElementById("UserInput").value;
+
+
+
+
+    //alert(input);
+	var databaseString="";
+	for (i=1;i<=numDatabase;i++) databaseString=databaseString+"site:"+listDatabase[i]+" OR ";
+	var webUrl = "https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q="+input+" "+databaseString;
+	//windowpop("https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q=randommmmm+search", 500, 500);
+	
+	window.open(webUrl,'search','height=800,width=500');
+   //alert("inputfea");
+}
+</script>
