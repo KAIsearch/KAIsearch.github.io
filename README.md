@@ -1,11 +1,9 @@
-# JavaScript To-Do List using React
+# KAI Search -- http://kaisearch.github.io/
 
-  This is JavaScript TO-DO application using **React js**.
-  
+  **KAI Search is a customizable, google based search engine that makes investment related search faster and easier.**
+
+  Developed By: Tianyu Guo (Ti)   Innovation Intern at khazanah Americas Incorporated
+
+  The customizable form is using **React js**.
+
   [React](http://facebook.github.io/react/) is a JavaScript Library built by [Facebook](https://twitter.com/fbplatform)
-  
-  **React creates a virtual DOM which makes the response time faster. It is powerful and flexible.**
-  
-  LIVE - [My React TO-DO List](http://javascript-react-todolist.getforge.io/)
-  
-  
