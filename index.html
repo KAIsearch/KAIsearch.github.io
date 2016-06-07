@@ -186,7 +186,7 @@ function jsBox(){
 	for (i=0;i<=items.length;i++) {
     if (listDatabase[i]!=""){
       if (exsitPrevBase==1){
-        databaseString+=" OR ";
+        databaseString+=" OR site:";
       }
         else if (exsitPrevBase==0){
           exsitPrevBase=1;
@@ -195,6 +195,7 @@ function jsBox(){
     }}
     exsitPrevBase=0;
     databaseString=databaseString.replace('undefined', '');
+    databaseString=databaseString.substr(0, databaseString.length-8);
 	var webUrl = "https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q="+"\""+input+"\""+" "+wordString+" "+databaseString;
 	//windowpop("https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q=randommmmm+search", 500, 500);
 
