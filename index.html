@@ -182,10 +182,18 @@ function jsBox(){
   wordString=wordString.replace('undefined', '');
     //alert(input);
 	var databaseString="site:";
+	var exsitPrevBase = 0;
 	for (i=0;i<=items.length;i++) {
     if (listDatabase[i]!=""){
-      databaseString+=listDatabase[i]+" OR ";
+      if (exsitPrevBase==1){
+        databaseString+=" OR ";
+      }
+        else if (exsitPrevBase==0){
+          exsitPrevBase=1;
+        }
+      databaseString+=listDatabase[i];
     }}
+    exsitPrevBase=0;
     databaseString=databaseString.replace('undefined', '');
 	var webUrl = "https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q="+"\""+input+"\""+" "+wordString+" "+databaseString;
 	//windowpop("https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q=randommmmm+search", 500, 500);
