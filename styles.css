@@ -18,9 +18,14 @@ body {
   margin: 30px auto;
 }
 #footer{
+
+  /*position:fixed;*/
+  /*bottom:0px;*/
   text-align: center;
-  font-size: 15px;
+  font-size: 18px;
+  /*right:25%;*/
 }
+
 h1 {
   margin: 20px;
   color: #7d82b0;
@@ -29,7 +34,7 @@ h1 {
 #app {
   box-shadow: 0 0 5px #684F91;
   font-size: 20px;
-  color: #080D3B;
+  color: #656567; /*grey color add text*/
   background-color: white;
 }
 
@@ -112,9 +117,47 @@ form {
 }
 
 .item.completed {
-  color: #C3C3C4;
+  color: #b30000; /*the color of text after clicking yes*/
 }
 
 #templates {
   display: none
+}
+#UserInput{
+  width: 100%;
+  font-family: inherit;
+  font-size: 18px;
+  padding: 10px 30px;
+  border-left:    1px  solid #7d82b0;
+  border-right:   1px  solid #7d82b0;
+  border-bottom:  2px  solid #7d82b0;
+  border-top:     15px solid #477187;
+
+  text-align: center;
+}
+#UserInputB{
+  width: 100%;
+  font-family: inherit;
+  font-size: 18px;
+  padding: 10px 30px;
+  border-left:    1px  solid #7d82b0;
+  border-right:   1px  solid #7d82b0;
+  border-bottom:  2px  solid #7d82b0;
+  border-top:     15px solid #477187;
+
+  text-align: center;
+}
+#searchbutton{
+  background-color: #7d82b0;
+border: 10;
+box-shadow: none;
+font-family: 'Titillium Web', 'Arial', sans-serif;
+font-size: 18px;
+color: #fff;
+cursor: pointer;
+padding: 8px 16px;
+padding: 1.6rem 2.4rem;
+text-transform: uppercase;
+margin-left: 5px;
+width: auto;
 }

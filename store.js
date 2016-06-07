@@ -1,8 +1,25 @@
 var items = [];
-
+var listDatabase = new Array();
+for (count =0;count<= items.length;count++){
+  listDatabase[count]="";
+}
+var numDatabase=0;//--------------need to change to at least 3
 // defining notifyComponents function which triggers an event
 var notifyComponents = function() {
   $(ListStore).trigger('storeHasChanged');
+  for (count = 0; count<=items.length;count++){
+    if (items[count].completed){
+      listDatabase[count]=items[count].description;
+    }
+    else if (!items[count].completed)
+    {
+      listDatabase[count]="";
+    }
+    else {
+      listDatabase[count]="";
+    }
+  }
+  //alert(listDatabase.length);
 };
 
 var findItemById = function(id) {
@@ -56,6 +73,7 @@ ListStore = {
     var item = findItemById(itemId);
     var currentCompletedValue = item.completed;
 
+
   var updateRequest = $.ajax({
     type: 'PUT',
     url: "https://listalous.herokuapp.com/lists/MyGroceryList/items/" + itemId,
@@ -65,6 +83,7 @@ ListStore = {
    updateRequest.done(function(itemData) {
       item.completed = itemData.completed;
       notifyComponents();
+
     });
   },
 
@@ -75,9 +94,10 @@ ListStore = {
       type: 'DELETE',
       url: "https://listalous.herokuapp.com/lists/MyGroceryList/items/" + itemId,
     });
-
+//notifyComponents();
     deleteRequest.done(function(itemData){
-      
+
     })
+
   }
 };

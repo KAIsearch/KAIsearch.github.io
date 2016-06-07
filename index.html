@@ -21,13 +21,12 @@
   </div>
 
   <script type="text/jsx">
-  var listDatabase = new Array();
-  var numDatabase=0;//--------------need to change to at least 3
+
     var CreationForm = React.createClass({
       render: function() {
         return (
           <form id="add-form" onSubmit={this.handleSubmit}>
-            <input id='create' ref="description" type='text' placeholder='Add databases here' />
+            <input id='create' ref="description" type='text' placeholder='Type your databases here or select below' />
           </form>
         )
       },
@@ -55,20 +54,22 @@
             <span className='complete-button' onClick={this.handleComplete}>{'\u2714'}</span>
             <div className='description'>{this.props.description}</div>
             <span className='delete-button' onClick={this.removeItem}>{'\u2718'}</span>
-
           </li>
         )
       },
     handleComplete: function() {
     // alert('trying to update item with an id of ' + this.props.id)
     ListStore.toggleCompleteness(this.props.id);
-    numDatabase++;
-    listDatabase[numDatabase]=this.props.description;
+//_______________________________________________________________________
+    //numDatabase++;
+    //listDatabase[numDatabase]=this.props.description;
+//_______________________________________________________________________
     //alert(listDatabase[numDatabase]+"num:"+numDatabase);
     },
 
     removeItem: function() {
        ListStore.deleteItem(this.props.id);
+
     }
   })
 
@@ -113,8 +114,6 @@
 
 
 
-
-
 <html>
 <head>
 	<title>KAIsearch</title>
@@ -123,7 +122,7 @@
 </head>
 <body>
   <div id="container2">
-    <h3>Company name and Attrribute</h3>
+
    <!--
     <div class="center">
     <div id="logo">
@@ -132,16 +131,28 @@
     <div id="search">
        <!-- <form action="https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q=randommmmm+search">   -->
            <b1>Company name</b1>
-           <input type="text" name="search" id="UserInput"><br>
+           <input type="text" name="search" id="UserInput" placeholder='i.e. "Docusign"' onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('searchbutton').click()"   ><br>
            <b1>Attribute   </b1>
-           <input type="text" name="search" id="UserInputB"><br>
-           <input type="submit" value="Search" onclick="jsBox()">
+           <input type="text" name="search" id="UserInputB" placeholder='i.e. "round and total equity or acquisitions"' onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('searchbutton').click()"    ><br><br>
+
+           <b1><input type="submit" id = "searchbutton" value="Search" onclick="jsBox()"></b1>
            <!-- <input type="submit" value="I'm Feeling Lucky" -->
+           <!-- <script language="javascript">
+           document.getElementById("UserInputB")
+              .addEventListener("keyup", function(event) {
+              event.preventDefault();
+              if (event.keyCode == 13) {
+                  document.getElementById("jsBox()");
+              }
+            });
+            </script> -->
         </form>
     </div>
   </div>
     </div>
-    <div id="footer">
+    <div id="footer" align="center">
             <!-- <span class="fr">
                 <a href="#" class="priv">Privacy</a>
                 <a href="#" class="terms">Terms</a>
@@ -153,8 +164,8 @@
                 <a href="#" class="about">About</a>
             </span> -->
             <span class="fl">
-                Version1.2 <br>
-                by khazanah Americas Incorporated
+                Version 3.03 <br>
+                by Khazanah Americas Incorporated
             </span>
             <!-- <b1>Version 1.2  By khazanah Americas Incorporated</b1> -->
     </div>
@@ -164,13 +175,35 @@
 function jsBox(){
    var input = document.getElementById("UserInput").value;
    var attribute = document.getElementById("UserInputB").value;
-
-
-
+   var words = attribute.split(" ");
+   var wordString = "\"";
+   var isWordFinish = 0;
+  for (count=0;count<=words.length;count++){
+    if (words[count]=="or"){
+      wordString+="\" OR \"";
+      isWordFinish=1;
+    }
+    else if (words[count]=="and"){
+      isWordFinish = 1;
+      wordString +="\" \"";
+  }
+    else {
+      if (!isWordFinish&&count!=0&&count!=words.length){wordString+=" ";}
+      else{}
+      wordString+=words[count];
+      isWordFinish=0;
+    }
+  }
+  wordString+="\"";
+  wordString=wordString.replace('undefined', '');
     //alert(input);
-	var databaseString="";
-	for (i=1;i<=numDatabase;i++) databaseString=databaseString+"site:"+listDatabase[i]+" OR ";
-	var webUrl = "https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q="+"\""+input+"\""+" "+attribute+" "+databaseString;
+	var databaseString="site:";
+	for (i=0;i<=items.length;i++) {
+    if (listDatabase[i]!=""){
+      databaseString+=listDatabase[i]+" OR ";
+    }}
+    databaseString=databaseString.replace('undefined', '');
+	var webUrl = "https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q="+"\""+input+"\""+" "+wordString+" "+databaseString;
 	//windowpop("https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q=randommmmm+search", 500, 500);
 
 	window.open(webUrl,'search','height=800,width=500');
