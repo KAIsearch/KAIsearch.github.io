@@ -37,10 +37,6 @@
         this.refs.description.getDOMNode().value = ''
         // alert('trying to create an item with description ' + description)
         ListStore.addItem(description);
-		 //numDatabase++;
-		//listDatabase[numDatabase]=description;
-    //numDatabase--;
-		//alert(listDatabase[numDatabase]+"num:"+numDatabase);  find out what is correct way to comment stuff!!!
       }
     })
 //link for creating dynemic arrey: https://www.hscripts.com/tutorials/javascript/dynamic-array.php
@@ -58,13 +54,7 @@
         )
       },
     handleComplete: function() {
-    // alert('trying to update item with an id of ' + this.props.id)
     ListStore.toggleCompleteness(this.props.id);
-//_______________________________________________________________________
-    //numDatabase++;
-    //listDatabase[numDatabase]=this.props.description;
-//_______________________________________________________________________
-    //alert(listDatabase[numDatabase]+"num:"+numDatabase);
     },
 
     removeItem: function() {
@@ -123,11 +113,7 @@
 <body>
   <div id="container2">
 
-   <!--
-    <div class="center">
-    <div id="logo">
-	  <img src="https://www.google.es/images/srpr/logo11w.png">
-    </div> -->
+
     <div id="search">
        <!-- <form action="https://www.google.com/?gfe_rd=cr&ei=mp5sVaWLNMf_-Qb6vYHoBg#q=randommmmm+search">   -->
            <b1>Company name</b1>

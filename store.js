@@ -3,8 +3,7 @@ var listDatabase = new Array();
 for (count =0;count<= items.length;count++){
   listDatabase[count]="";
 }
-var numDatabase=0;//--------------need to change to at least 3
-// defining notifyComponents function which triggers an event
+var numDatabase=0;
 var notifyComponents = function() {
   $(ListStore).trigger('storeHasChanged');
   for (count = 0; count<=items.length;count++){
@@ -19,7 +18,6 @@ var notifyComponents = function() {
       listDatabase[count]="";
     }
   }
-  //alert(listDatabase.length);
 };
 
 var findItemById = function(id) {
@@ -28,16 +26,6 @@ var findItemById = function(id) {
   })[0];
 },
 
-// ListStore = {
-
-//   getItems: function() {
-//     return items;
-//   },
-
-//   loadItems: function() {},
-//   addItem: function(itemDescription) {},
-//   toggleCompleteness: function(itemId) {}
-// };
 ListStore = {
 
   getItems: function() {
@@ -94,7 +82,6 @@ ListStore = {
       type: 'DELETE',
       url: "https://listalous.herokuapp.com/lists/MyGroceryList/items/" + itemId,
     });
-//notifyComponents();
     deleteRequest.done(function(itemData){
 
     })
